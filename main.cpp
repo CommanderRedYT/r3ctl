@@ -1,53 +1,102 @@
 #include <QCoreApplication>
-#include <QWebSocket>
 #include <QDebug>
-#include <QJsonObject>
-#include <QJsonValue>
-#include <QJsonDocument>
 #include <QTimer>
+#include <QJsonObject>
+#include <QJsonArray>
+
+#include "r3client.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    QWebSocket webSocket;
-    QObject::connect(&webSocket, &QWebSocket::connected, [&](){ qDebug() << "connected()"; });
-    QObject::connect(&webSocket, &QWebSocket::disconnected, [&](){ qDebug() << "disconnected()"; });
-//    QObject::connect(&webSocket, &QWebSocket::textFrameReceived, [&](const QString &frame, bool isLastFrame){
-//        qDebug() << "textFrameReceived()";
-//    });
-//    QObject::connect(&webSocket, &QWebSocket::binaryFrameReceived, [&](const QByteArray &frame, bool isLastFrame){
-//        qDebug() << "binaryFrameReceived()";
-//    });
-    QObject::connect(&webSocket, &QWebSocket::textMessageReceived, [&](const QString &message){
-        qDebug() << "textMessageReceived()" << message;
-    });
-    QObject::connect(&webSocket, &QWebSocket::binaryMessageReceived, [&](const QByteArray &message){
-        qDebug() << "binaryMessageReceived()" << message;
-    });
-    QObject::connect(&webSocket, qOverload<QAbstractSocket::SocketError>(&QWebSocket::error), [&](QAbstractSocket::SocketError error){
-        qDebug() << "error()" << error;
-    });
-    webSocket.open(QUrl{"ws://licht.realraum.at/sock"});
+    const auto arguments = [&](){
+        auto arguments = a.arguments();
+        arguments.removeFirst();
+        return arguments;
+    }();
 
-    const auto sendMQTT = [&](const QString &ctx, const QJsonValue &data){
-        const QJsonObject m{{"ctx", ctx}, {"data", data}};
-        const auto text = QJsonDocument{m}.toJson();
-        qDebug() << "sendTextMessage()" << text;
-        webSocket.sendTextMessage(text);
-    };
+    if (arguments.isEmpty())
+    {
+        puts("No cmd given!");
+        return -1;
+    }
 
-    const auto mqtttopic_golightctrl = [](const QString &lightname){
-        return QString{"action/GoLightCtrl/%0"}.arg(lightname);
-    };
+    R3Client client;
 
-    const auto sendYmhButton = [&](const QString &btn){
-        sendMQTT(mqtttopic_golightctrl(btn), QJsonObject{{"Action", "send"}});
-    };
+    QObject::connect(&client, &R3Client::disconnected, [](){ qDebug() << "disconnected()"; });
+    QObject::connect(&client, &R3Client::error, [](QAbstractSocket::SocketError error){ qDebug() << "error()" << error; });
 
-    QTimer::singleShot(1000, [&](){
-        sendYmhButton("ymhvolup");
-    });
+    if (arguments.first() == "log")
+    {
+        QObject::connect(&client, &R3Client::connected, [](){ qDebug() << "connected()"; });
+        QObject::connect(&client, &R3Client::statusReceived, [](const QString &ctx, const QJsonValue &jsonValue){ qDebug() << "statusReceived()" << ctx << jsonValue; });
+    }
+    else if (arguments.first() == "script")
+    {
+        QObject::connect(&client, &R3Client::connected, [&](){
+            client.sendMQTT("action/ceilingscripts/activatescript", QJsonObject{
+                {"colourlist", QJsonArray{
+                     QJsonObject{{"b", 0},   {"cw", 0}, {"g", 0},   {"r", 1000}, {"ww", 0}},
+                     QJsonObject{{"b", 100}, {"cw", 0}, {"g", 0},   {"r", 800},  {"ww", 0}},
+                     QJsonObject{{"b", 300}, {"cw", 0}, {"g", 0},   {"r", 0},    {"ww", 0}},
+                     QJsonObject{{"b", 100}, {"cw", 0}, {"g", 500}, {"r", 0},    {"ww", 0}},
+                     QJsonObject{{"b", 0},   {"cw", 0}, {"g", 800}, {"r", 0},    {"ww", 0}},
+                     QJsonObject{{"b", 0},   {"cw", 0}, {"g", 200}, {"r", 800},  {"ww", 0}}
+                 }},
+                {"fadeduration", 500},
+                {"script", "wave"}
+            });
+        });
+    }
+    else if (arguments.first() == "sendYmhButton")
+    {
+        if (arguments.size() < 2)
+        {
+            puts("No button given for sendYmhButton");
+            return -3;
+        }
+
+        const auto btn = arguments.at(1);
+
+        QObject::connect(&client, &R3Client::connected, [&client,btn](){
+            client.sendYmhButton(btn);
+        });
+        QObject::connect(&client, &R3Client::statusReceived, [btn](const QString &ctx, const QJsonValue &jsonValue){
+            if (ctx != "action/yamahastereo/ircmd")
+                return;
+            if (!jsonValue.isObject())
+            {
+                qWarning() << "json data is not an object";
+                qWarning() << jsonValue;
+                return;
+            }
+            const auto object = jsonValue.toObject();
+            if (!object.contains("Cmd"))
+            {
+                qWarning() << "json data does not contain Cmd";
+                qWarning() << object;
+                return;
+            }
+            const auto cmdValue = object.value("Cmd");
+            if (!cmdValue.isString())
+            {
+                qWarning() << "json data Cmd is not a string";
+                qWarning() << object;
+                return;
+            }
+            const auto cmd = cmdValue.toString();
+            if (cmd == btn)
+                QCoreApplication::quit();
+        });
+    }
+    else
+    {
+        puts("Invalid cmd. Valid are log, script, sendYmhButton");
+        return -2;
+    }
+
+    client.open();
 
     return a.exec();
 }
