@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="connectButton">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>30</y>
+      <width>80</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Connect</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="disconnectButton">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>30</y>
+      <width>80</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Disconnect</string>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="logView">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>280</y>
+      <width>591</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>60</y>
+      <width>481</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="2" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <widget class="QLabel" name="lamp4Label">
+         <property name="text">
+          <string>Lamp 4</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="lamp4OnButton">
+         <property name="text">
+          <string>On</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="lamp4OffButton">
+         <property name="text">
+          <string>Off</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="0">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLabel" name="lamp1Label">
+         <property name="text">
+          <string>Lamp 1</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="lamp1OnButton">
+         <property name="text">
+          <string>On</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="lamp1OffButton">
+         <property name="text">
+          <string>Off</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="2">
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QLabel" name="lamp2Label">
+         <property name="text">
+          <string>Lamp 2</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="lamp2OnButton">
+         <property name="text">
+          <string>On</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="lamp2OffButton">
+         <property name="text">
+          <string>Off</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="2">
+      <layout class="QVBoxLayout" name="verticalLayout_9">
+       <item>
+        <widget class="QLabel" name="lamp5Label">
+         <property name="text">
+          <string>Lamp 5</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="lamp5OnButton">
+         <property name="text">
+          <string>On</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="lamp5OffButton">
+         <property name="text">
+          <string>Off</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="4">
+      <layout class="QVBoxLayout" name="verticalLayout_8">
+       <item>
+        <widget class="QLabel" name="lamp3Label">
+         <property name="text">
+          <string>Lamp 3</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="lamp3OnButton">
+         <property name="text">
+          <string>On</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="lamp3OffButton">
+         <property name="text">
+          <string>Off</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="4">
+      <layout class="QVBoxLayout" name="verticalLayout_10">
+       <item>
+        <widget class="QLabel" name="lamp6Label">
+         <property name="text">
+          <string>Lamp 6</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="lamp6OnButton">
+         <property name="text">
+          <string>On</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="lamp6OffButton">
+         <property name="text">
+          <string>Off</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="1">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="3">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="1">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="discoLeftButton">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>130</y>
+      <width>80</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Disco L</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="toggleAllButton">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>100</y>
+      <width>80</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Toggle all</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="discoRightButton">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>130</y>
+      <width>80</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Disco R</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bpmButton">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>190</y>
+      <width>151</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>BPM tap</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spinBox">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>220</y>
+      <width>61</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>10000</number>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="audioDeviceSelection">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>300</y>
+      <width>131</width>
+      <height>23</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="openAudioDeviceButton">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>340</y>
+      <width>80</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Open</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="closeAudioDeviceButton">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>340</y>
+      <width>80</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Close</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>370</y>
+      <width>170</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QRadioButton" name="radioButton">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSlider" name="verticalSlider">
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QRadioButton" name="radioButton_2">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSlider" name="verticalSlider_2">
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QRadioButton" name="radioButton_3">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSlider" name="verticalSlider_3">
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="value">
+          <number>0</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QSlider" name="verticalSlider_4">
+       <property name="maximum">
+        <number>100</number>
+       </property>
+       <property name="value">
+        <number>50</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>520</y>
+      <width>79</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Disco L</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Disco R</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Toggle All</string>
+     </property>
+    </item>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

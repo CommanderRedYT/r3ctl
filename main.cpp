@@ -1,14 +1,22 @@
-#include <QCoreApplication>
+#include <QApplication>
 #include <QDebug>
 #include <QTimer>
 #include <QJsonObject>
 #include <QJsonArray>
 
 #include "r3client.h"
+#include "mainwindow.h"
+
+#include <memory>
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    QApplication a(argc, argv);
+
+    MainWindow mainWindow;
+    mainWindow.show();
+
+    return a.exec();
 
     const auto arguments = [&](){
         auto arguments = a.arguments();
