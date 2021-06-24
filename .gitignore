@@ -72,3 +72,5 @@ Thumbs.db
 *.exe
 
 
+r3ctl
+moc_*.h
