@@ -20,5 +20,8 @@ Fork from [0xFEEDC0DE64](https://github.com/0xFEEDC0DE64/r3ctl)
     ```shell
     COMING SOON
     ```
+3. Compile:
+   1. `qmake`
+   2. `make`
 
-3. Execute `./r3ctl`
+4. Execute `./r3ctl`
