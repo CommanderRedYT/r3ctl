@@ -59,7 +59,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_timer.setTimerType(Qt::PreciseTimer);
     connect(&m_timer, &QTimer::timeout, this, &MainWindow::bpmTimeout);
 
-    connect(m_ui.spinBox, &QSpinBox::valueChanged, &m_timer, qOverload<int>(&QTimer::setInterval));
+    connect(m_ui.spinBox, qOverload<int>(&QSpinBox::valueChanged), &m_timer, qOverload<int>(&QTimer::setInterval));
 
     connect(&m_detector, &BpmDetector::receivedFrames, this, &MainWindow::receivedFrames);
 
